@@ -1,4 +1,4 @@
-# Switchly
+
 # Switchly 🚀
 
 **Switchly** is a backend application designed to manage feature flags for projects through RESTful APIs. It provides endpoints to create, retrieve, update, and delete feature flags, helping applications control feature availability in a structured way.
