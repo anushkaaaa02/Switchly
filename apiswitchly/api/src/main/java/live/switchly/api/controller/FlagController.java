@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 
 @RestController
 @RequestMapping("/api/v1")
@@ -31,7 +33,12 @@ public class FlagController {
     @PostMapping("/projects/{projectId}/flags")
     @ResponseStatus(HttpStatus.CREATED)
     public Flag create(@PathVariable UUID projectId, @Valid @RequestBody CreateFlagRequest request) {
-        return flagService.create(projectId, request.key(), request.name());
+        return flagService.create(
+                projectId,
+                request.key(),
+                request.name(),
+                request.description()
+        );
     }
 
     @GetMapping("/projects/{projectId}/flags")
@@ -48,4 +55,11 @@ public class FlagController {
     public Flag setState(@PathVariable UUID flagId, @Valid @RequestBody UpdateFlagStateRequest request) {
         return flagService.setEnabled(flagId, request.enabled());
     }
+
+    @DeleteMapping("/flags/{flagId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable UUID flagId) {
+        flagService.delete(flagId);
+    }
+
 }
